@@ -30,4 +30,4 @@ La capa de logica (JavaScript) opera de manera asincrona i gestiona els següent
 L'aplicacio ha estat optimitzada per a navegadors moderns amb suport per a propietats de CSS3 avançades i JavaScript ES6+. No requereix llibreries externes (Vanilla Stack), assegurant una carrega instantania i una execucio eficient en el costat del client.
 
 ---
-**PROJECTE THE SPORTS ARENA - 2024**
+**PROJECTE THE SPORTS ARENA - 2026**
