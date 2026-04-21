@@ -1,0 +1,45 @@
+/* Importamos las fuentes igual que antes */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+/* --- CONFIGURACIÓN BÁSICA --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050a14;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- EL RECUADRO (TARJETA) --- */
+section {
+    display: none;
+    width: 100%;
+    max-width: 650px;
+    padding: 30px;
+}
+
+section.active {
+    display: block;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    /* Fondo casi transparente */
+    backdrop-filter: blur(20px);
+    /* El efecto de desenfoque */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 35px;
+    padding: 60px 50px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+}
+
+
