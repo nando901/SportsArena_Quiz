@@ -4,7 +4,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Sports Arena |Quiz</title>
+    <title>The Sports Arena | Quiz</title>
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     <link
@@ -30,18 +30,22 @@
         </section>
 
         <section id="screen-select">
-            <div class="glass-card">
-                <h2 id="welcome-user">Hola!</h2>
-                <p>Selecciona el teu camp de batalla:</p>
-                <div class="category-grid">
-                    <button class="cat-card gold" onclick="loadQuiz('A')">
-                        <div class="icon">🥇</div>
-                        <span>Jocs Olímpics</span>
-                    </button>
-                    <button class="cat-card blue" onclick="loadQuiz('B')">
-                        <div class="icon">🎮</div>
-                        <span>Món Gamer</span>
-                    </button>
+            <div class="top-bar">
+                <button class="btn-back" onclick="goBack()" aria-label="Tornar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="glass-card selection-box">
+                <h2 id="welcome-user">Hola, (NOM JUGADOR)</h2>
+                <p>Selecciona el teu camp de batalla.</p>
+                
+                <div class="category-grid-outline">
+                    <button class="btn-outline-cyan" onclick="loadQuiz('A')">JOCS OLIMPICS</button>
+                    <button class="btn-outline-cyan" onclick="loadQuiz('B')">MON GAMER</button>
                 </div>
             </div>
         </section>
