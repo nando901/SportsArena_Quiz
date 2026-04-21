@@ -1,3 +1,9 @@
+/**
+ * THE SPORTS ARENA - Lògica de Programació Professional
+ * - 10 preguntes per categoria (total 20)
+ * - Selecció aleatòria de 6 preguntes per partida
+ * - Algorisme de barreja Fisher-Yates
+ */
 //** PREGUNTES DEL QUIZ */
 const quizData = {
     A: [ // CATEGORIA A: JOCS OLÍMPICS
@@ -75,7 +81,7 @@ function checkUser() {
 function loadQuiz(category) {
     // Copiem les preguntes de la categoria escollida
     let allQuestions = [...quizData[category]];
-
+    
     // Barregem totes les preguntes (10) i en triem només les primeres 6
     shuffleArray(allQuestions);
     currentQuestions = allQuestions.slice(0, 6);
@@ -97,11 +103,11 @@ function renderQuestion() {
 
     const data = currentQuestions[questionIndex];
     document.getElementById('question-text').innerText = data.q;
-
+    
     // Actualitzem el comptador visual (Ex: 01 / 06)
     const currentNum = questionIndex + 1;
     document.getElementById('progress').innerText = `${currentNum < 10 ? '0' + currentNum : currentNum} / 06`;
-
+    
     const container = document.getElementById('options-container');
     container.innerHTML = '';
 
