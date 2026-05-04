@@ -1,3 +1,6 @@
+/**
+ * THE SPORTS ARENA - Lògica de Programació Professional
+ */
 //** PREGUNTES DEL QUIZ */
 const quizData = {
     A: [ // CATEGORIA A: JOCS OLÍMPICS
@@ -32,11 +35,8 @@ let score = 0;
 let timer;
 let timeLeft = 15;
 let userName = "";
+let userHistory = []; // NOU: Historial de respostes
 
-/**
- * Funció per barrejar arrays (Algorisme Fisher-Yates)
- * Això assegura que l'ordre sigui totalment aleatori
- */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -45,67 +45,44 @@ function shuffleArray(array) {
     return array;
 }
 
-/**
- * Gestiona el canvi visual de pantalles
- */
 function showScreen(screenId) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
 }
 
-/**
- * Valida l'usuari i passa a la selecció de categoria
- */
 function checkUser() {
     const input = document.getElementById('username');
     userName = input.value.trim();
-
     if (userName.length < 2) {
         alert("Si us plau, introdueix el teu nom per jugar.");
         return;
     }
-
     document.getElementById('welcome-user').innerText = `Hola, ${userName}!`;
     showScreen('screen-select');
 }
 
-/**
- * Prepara la partida: tria 6 preguntes aleatòries de la categoria
- */
 function loadQuiz(category) {
-    // Copiem les preguntes de la categoria escollida
     let allQuestions = [...quizData[category]];
-
-    // Barregem totes les preguntes (10) i en triem només les primeres 6
     shuffleArray(allQuestions);
     currentQuestions = allQuestions.slice(0, 6);
-
     questionIndex = 0;
     score = 0;
+    userHistory = []; // NOU: Reiniciar historial
     showScreen('screen-game');
     renderQuestion();
 }
 
-/**
- * Mostra la pregunta i les seves opcions
- */
 function renderQuestion() {
     if (questionIndex >= currentQuestions.length) {
         showResults();
         return;
     }
-
     const data = currentQuestions[questionIndex];
     document.getElementById('question-text').innerText = data.q;
-
-    // Actualitzem el comptador visual (Ex: 01 / 06)
     const currentNum = questionIndex + 1;
     document.getElementById('progress').innerText = `${currentNum < 10 ? '0' + currentNum : currentNum} / 06`;
-
     const container = document.getElementById('options-container');
     container.innerHTML = '';
-
-    // Creem els botons de les respostes
     data.a.forEach((option, i) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
@@ -113,64 +90,85 @@ function renderQuestion() {
         btn.onclick = () => handleAnswer(i);
         container.appendChild(btn);
     });
-
     startTimer();
 }
 
-/**
- * Control del temporitzador de 15 segons
- */
 function startTimer() {
     clearInterval(timer);
     timeLeft = 15;
     document.getElementById('timer').innerText = timeLeft;
-
     timer = setInterval(() => {
         timeLeft--;
         document.getElementById('timer').innerText = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            nextQuestion(); // Pasa a la siguiente si el tiempo se agota
+            nextQuestion(); 
         }
     }, 1000);
 }
 
-/**
- * Comprova si la resposta premuda és la correcta (index c)
- */
 function handleAnswer(selectedIndex) {
     clearInterval(timer);
-    if (selectedIndex === currentQuestions[questionIndex].c) {
-        score++;
-    }
+    const currentQ = currentQuestions[questionIndex];
+    const isCorrect = selectedIndex === currentQ.c;
+    
+    // NOU: Guardar resposta al historial
+    userHistory.push({
+        question: currentQ.q,
+        userAnswer: selectedIndex === -1 ? "Temps esgotat ⏱️" : currentQ.a[selectedIndex],
+        correctAnswer: currentQ.a[currentQ.c],
+        correct: isCorrect
+    });
+
+    if (isCorrect) score++;
     nextQuestion();
 }
 
 function nextQuestion() {
+    // NOU: Validar si s'ha guardat la resposta (per si el temps s'esgota)
+    if(userHistory.length <= questionIndex) {
+        const currentQ = currentQuestions[questionIndex];
+        userHistory.push({
+            question: currentQ.q,
+            userAnswer: "Temps esgotat ⏱️",
+            correctAnswer: currentQ.a[currentQ.c],
+            correct: false
+        });
+    }
     questionIndex++;
-    // Petita pausa per feedback visual (opcional)
     setTimeout(renderQuestion, 200);
 }
 
-/**
- * Pantalla final amb la puntuació
- */
 function showResults() {
     clearInterval(timer);
     showScreen('screen-results');
     document.getElementById('final-score').innerText = score;
 }
 
-/**
- * Torna a la selecció de categoria
- */
+// NOU: Funció per mostrar detalls
+function showDetailedResults() {
+    const container = document.getElementById('details-list');
+    container.innerHTML = '';
+    userHistory.forEach((item, index) => {
+        const detailItem = document.createElement('div');
+        detailItem.className = `detail-item ${item.correct ? 'correct-border' : 'wrong-border'}`;
+        detailItem.innerHTML = `
+            <p style="margin: 0; font-weight: bold; color: var(--accent);">#${index + 1}: ${item.question}</p>
+            <p style="margin: 5px 0 0 0; font-size: 0.9rem;">
+                Tu: <span style="color: ${item.correct ? '#2ecc71' : '#ff4757'}">${item.userAnswer}</span><br>
+                ${!item.correct ? `Correcta: <span style="color: #2ecc71">${item.correctAnswer}</span>` : ''}
+            </p>
+            <hr style="opacity: 0.1; margin: 10px 0;">
+        `;
+        container.appendChild(detailItem);
+    });
+    showScreen('screen-detail');
+}
+
 function restart() {
     showScreen('screen-select');
 }
 
-/**
- * Surt del joc (torna a l'inici)
- */
 function exit() {
     location.reload();
 }
