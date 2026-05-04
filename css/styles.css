@@ -1,24 +1,16 @@
-/* THE SPORTS ARENA - FULL PREMIUM CSS 
-   Estilo: Cyber-Futurista Elegante 
-   Versión: Ampliada (Caja Grande + Botones Glow)
-*/
-
+/* THE SPORTS ARENA - FULL PREMIUM CSS */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
 
 :root {
     --accent: #00f2ff;
-    /* Cian neón */
     --accent-dark: #0062ff;
-    /* Azul profundo */
     --bg-dark: #050a14;
-    /* Fondo espacial */
     --text: #ffffff;
     --glass: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.1);
     --neon-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
 }
 
-/* --- BASE --- */
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +28,6 @@ body {
     overflow: hidden;
 }
 
-/* Rejilla de fondo */
 body::before {
     content: "";
     position: absolute;
@@ -47,12 +38,10 @@ body::before {
     z-index: -1;
 }
 
-/* --- CONTENEDOR PRINCIPAL (RECUADRO GRANDE) --- */
 section {
     display: none;
     width: 100%;
     max-width: 650px;
-    /* Tamaño ampliado */
     padding: 30px;
 }
 
@@ -67,18 +56,14 @@ section.active {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 35px;
-    /* Más redondeado para el nuevo tamaño */
     padding: 60px 50px;
-    /* Espaciado interno generoso */
     text-align: center;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* --- TIPOGRAFÍA --- */
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.8rem;
-    /* Título más imponente */
     letter-spacing: 5px;
     margin-bottom: 20px;
     text-shadow: var(--neon-shadow);
@@ -97,7 +82,6 @@ p {
     font-size: 1.1rem;
 }
 
-/* --- INPUTS --- */
 input {
     width: 100%;
     padding: 18px;
@@ -117,7 +101,6 @@ input:focus {
     box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
 }
 
-/* --- BOTONES "CYBER-GLOW" --- */
 .btn-main {
     position: relative;
     background: transparent;
@@ -144,7 +127,6 @@ input:focus {
     transform: translateY(-3px);
 }
 
-/* Botón de salida (Sutil y elegante) */
 .btn-outline {
     background: transparent;
     color: rgba(255, 255, 255, 0.5);
@@ -167,7 +149,6 @@ input:focus {
     background: rgba(255, 71, 87, 0.05);
 }
 
-/* --- CATEGORÍAS Y OPCIONES --- */
 .category-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -219,7 +200,6 @@ input:focus {
     padding-left: 35px;
 }
 
-/* --- JUEGO --- */
 .game-header {
     display: flex;
     justify-content: space-between;
@@ -227,67 +207,39 @@ input:focus {
     font-family: 'Orbitron', sans-serif;
 }
 
-.timer-badge {
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 8px 20px;
-    border-radius: 25px;
-    box-shadow: var(--neon-shadow);
-}
-
-/* --- RESULTADOS --- */
 #final-score {
     display: block;
     font-family: 'Orbitron', sans-serif;
     font-size: 6rem;
-    /* Score gigante y pro */
     color: var(--accent);
     text-shadow: var(--neon-shadow);
     margin: 30px 0;
 }
 
-/* --- ANIMACIONES --- */
 @keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes pulseGlow {
-    0% {
-        box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-    }
-
-    50% {
-        box-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
-    }
-
-    100% {
-        box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-    }
+.detail-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 5px solid transparent;
 }
 
-#screen-welcome .btn-main {
-    animation: pulseGlow 2.5s infinite;
+.correct-border { border-left-color: #2ecc71; }
+.wrong-border { border-left-color: #ff4757; }
+
+#details-list::-webkit-scrollbar { width: 6px; }
+#details-list::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
 }
 
-/* Mobile */
 @media (max-width: 500px) {
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .glass-card {
-        padding: 40px 20px;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
+    .category-grid { grid-template-columns: 1fr; }
+    .glass-card { padding: 40px 20px; }
+    h1 { font-size: 2rem; }
 }
