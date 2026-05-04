@@ -56,7 +56,7 @@
                         </svg>
                         <span id="timer">10</span>
                     </div>
-                    <div id="progress" class="step-counter">01 / 03</div>
+                    <div id="progress" class="step-counter">01 / 06</div>
                 </div>
                 <h3 id="question-text">Preparant el repte...</h3>
                 <div id="options-container" class="options-grid"></div>
@@ -71,9 +71,19 @@
                     <p>Encerts Totals</p>
                 </div>
                 <div class="result-actions">
-                    <button class="btn-main" onclick="restart()">REINTENTAR PARTIDA</button>
+                    <button class="btn-main" onclick="showDetailedResults()" style="margin-bottom: 15px;">VEURE DETALLS</button>
+                    <button class="btn-outline" onclick="restart()">REINTENTAR PARTIDA</button>
                     <button class="btn-outline" onclick="exit()">TANCAR SISTEMA</button>
                 </div>
+            </div>
+        </section>
+
+        <section id="screen-detail">
+            <div class="glass-card">
+                <h2 style="font-size: 1.5rem;">REVISIÓ DE PARTIDA</h2>
+                <div id="details-list" style="text-align: left; margin: 20px 0; max-height: 350px; overflow-y: auto; padding-right: 10px;">
+                </div>
+                <button class="btn-main" onclick="showScreen('screen-results')">TORNAR ENRERE</button>
             </div>
         </section>
     </main>
